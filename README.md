@@ -2,6 +2,20 @@
 
 Desktop pet Windows transparan, always-on-top, dibuat dengan Tauri 2 + Three.js lokal. Mochi adalah karakter 3D prosedural original dengan laptop mini; SVG/CSS dipertahankan hanya sebagai fallback jika WebGL gagal. Mochi mengikuti aktivitas AI di 9router, termasuk Hermes/agent lain yang request-nya melewati router ini.
 
+## Tampilan
+
+**Tidur (idle)** — mata tertutup, kepala bersandar di kaki, napas lembut, simbol Z mengambang, ekor mengibas pelan.
+
+![Mochi tidur saat idle](docs/screenshots/3d-idle.png)
+
+**Mengetik (working)** — menghadap laptop, kedua kaki mengetik bergantian, ekor aktif, telinga berkedut.
+
+![Mochi mengetik saat working](docs/screenshots/3d-working.png)
+
+**Offline** — kucing tetap terjaga menunggu koneksi 9router kembali.
+
+![Mochi saat offline](docs/screenshots/3d-offline.png)
+
 ## Jalankan
 Klik dua kali `AIMate-Widget.exe` atau `Start AIMate.bat`. Geser melalui area karakter/header. Tombol slider membuka pengaturan; X keluar.
 
