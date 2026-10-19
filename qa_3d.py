@@ -23,7 +23,10 @@ try:
    page.wait_for_timeout(500)
    second = page.evaluate('window.__mochi3d.getSnapshot()')
    page.screenshot(path=str(root/f'qa/3d-{state}.png'), omit_background=True)
-   results.append({'state':state,'first':first,'second':second})
+   if state == 'working':
+    assert first['animation']['tailSway'] != second['animation']['tailSway'], 'tail sway must animate'
+    assert first['animation']['tailBend'] != second['animation']['tailBend'], 'tail tip must flex'
+   results.append({'state':state,'tail':second['animation'],'frames':second['frames']})
   page.locator('#settings-button').click()
   for size in ['50','75','100']:
    page.locator('#widget-size').fill(size)

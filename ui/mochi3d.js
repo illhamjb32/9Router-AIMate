@@ -90,8 +90,16 @@ export function initMochi3D(container = document.getElementById('mochi-3d')) {
     const body = ball(cat, blue, [0, .68, -.03], [.66, .76, .54]);
     ball(cat, cream, [0, .66, .37], [.48, .58, .24]);
     const tail = new THREE.Group(); tail.position.set(-.45, .2, -.1); cat.add(tail);
-    tube(tail, blue, [[0, 0, 0], [-.55, .03, -.12], [-.93, .24, -.04], [-.97, .65, .04], [-.78, .82, .12]], .15);
-    ball(tail, cream, [-.78, .82, .12], [.155, .155, .155]);
+    const tailMesh = tube(tail, blue, [[0, 0, 0], [-.55, .03, -.12], [-.93, .24, -.04], [-.97, .65, .04], [-.78, .82, .12]], .15);
+    const tailTip = ball(tail, cream, [-.78, .82, .12], [.155, .155, .155]);
+    // Deform the original vertices in place: no per-frame geometry allocation.
+    const tailPositions = tailMesh.geometry.attributes.position;
+    const tailRest = tailPositions.array.slice();
+    tailMesh.frustumCulled = false;
+    function tailOffset(y, t, amplitude) {
+      const weight = THREE.MathUtils.clamp(y / .82, 0, 1);
+      return Math.sin(t * 2.2 - weight * 2.4) * amplitude * weight * weight;
+    }
     for (const x of [-.43, .43]) {
       ball(cat, cream, [x, .19, .34], [.29, .19, .36]);
       ball(cat, pink, [x, .18, .667], [.105, .072, .023]);
@@ -99,9 +107,10 @@ export function initMochi3D(container = document.getElementById('mochi-3d')) {
     }
     const head = new THREE.Group(); cat.add(head);
     ball(head, cream, [0, 0, 0], [.83, .72, .65]);
+    const ears = [];
     // Soft triangular ears with sculpted pink inserts.
     for (const side of [-1, 1]) {
-      const ear = new THREE.Group(); ear.position.set(side * .57, .52, -.045); ear.rotation.z = -side * .22; head.add(ear);
+      const ear = new THREE.Group(); ear.position.set(side * .57, .52, -.045); ear.rotation.z = -side * .22; head.add(ear); ears.push(ear);
       const eg = new THREE.ConeGeometry(.31, .65, 3, 1); eg.rotateY(Math.PI / 2);
       const e = mesh(eg, blue, ear, [0, .16, 0], [1, 1, .67]);
       e.rotation.x = -.08;
@@ -185,7 +194,30 @@ export function initMochi3D(container = document.getElementById('mochi-3d')) {
         p.rotation.x = working ? -.15 - lift : 0;
         animation[i ? 'rightPaw' : 'leftPaw'] = lift;
       });
-      tail.rotation.y = reduced ? 0 : Math.sin(t * .7) * (sleeping ? .025 : .08);
+      const energy = (working ? .22 : .14) * (1 - sleepMix) + .035 * sleepMix;
+      const amplitude = reduced ? 0 : energy;
+      tail.rotation.y = Math.sin(t * 1.2) * amplitude;
+      tail.rotation.z = Math.sin(t * 1.6) * amplitude * .65;
+      for (let i = 0; i < tailPositions.count; i++) {
+        const j = i * 3, bend = tailOffset(tailRest[j + 1], t, amplitude);
+        tailPositions.array[j] = tailRest[j] + bend;
+        tailPositions.array[j + 1] = tailRest[j + 1];
+        tailPositions.array[j + 2] = tailRest[j + 2] + bend * .65;
+      }
+      tailPositions.needsUpdate = true;
+      tailMesh.geometry.computeVertexNormals();
+      const tipBend = tailOffset(.82, t, amplitude);
+      tailTip.position.set(-.78 + tipBend, .82, .12 + tipBend * .65);
+      ears.forEach((ear, i) => {
+        const phase = (t + i * 1.7) % 6.8;
+        const twitch = !reduced && phase < .65 ? Math.sin(phase / .65 * Math.PI) * Math.sin(phase * 19) : 0;
+        ear.rotation.z = (i ? -1 : 1) * .22 + twitch * .13 * (1 - sleepMix * .7);
+      });
+      if (!reduced) {
+        head.rotation.y = Math.sin(t * .85) * .055 * (1 - sleepMix);
+        head.position.y += Math.sin(t * 5) * .018 * Number(working);
+      }
+      Object.assign(animation, { tailSway: tail.rotation.z, tailBend: tipBend, earTwitch: ears[0].rotation.z });
       zzz.forEach((z, i) => {
         const phase = reduced ? i / 3 : (t * .18 + i / 3) % 1;
         z.visible = sleeping;
