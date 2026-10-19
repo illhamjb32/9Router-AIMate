@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><title>AIMate · teman kerjamu</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script><script type="module" src="mochi3d.js"></script></head>
+<body>
+<main id="widget" data-state="offline">
+  <header class="toolbar" data-tauri-drag-region>
+    <span class="brand" data-tauri-drag-region>Mochi <span class="brand-sub" data-tauri-drag-region>/ AIMate</span></span>
+    <span class="drag-hint" data-tauri-drag-region>⠿ geser</span>
+    <div class="controls"><button id="settings-button" class="icon-button" aria-label="Buka pengaturan" title="Pengaturan" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></svg></button><button id="quit-button" class="icon-button" aria-label="Keluar dari AIMate" title="Keluar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg></button></div>
+  </header>
+  <div class="pet-area" data-tauri-drag-region>
+
+    <div id="preview-badge" hidden>PREVIEW · bukan data live</div>
+    <div id="mochi-3d" role="img" aria-label="Mochi, kucing 3D dengan laptop mini" aria-describedby="pet-description"></div>
+    <svg class="pet" viewBox="0 0 340 265" role="img" aria-labelledby="pet-title pet-description">
+<title id="pet-title">Mochi · kucing DiKode</title><desc id="pet-description">Kucing biru putih berkacamata bulat dengan laptop coding.</desc>
+<defs><linearGradient id="blue" x2="0.3" y2="1"><stop stop-color="#55b8ff"/><stop offset="1" stop-color="#1764e6"/></linearGradient><linearGradient id="laptop" x2="1" y2="1"><stop stop-color="#244b91"/><stop offset="1" stop-color="#102859"/></linearGradient></defs>
+<ellipse cx="171" cy="247" rx="116" ry="8" fill="#173674" opacity=".12"/>
+<g stroke="#52769a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<g class="tail"><path d="M107 224C60 246 44 215 52 190c5-17 20-14 19-2-9 22 13 23 24 12" fill="url(#blue)"/></g>
+<path d="M104 155c-22 17-28 55-17 77 20 18 100 15 124-2l-13-76Z" fill="url(#blue)"/>
+<path d="M129 162c-13 18-18 40-9 65h53l18-65" fill="#fff" stroke="none"/>
+<g class="cat">
+<!-- Rounded kitten silhouette with soft, short ears. -->
+<path d="M89 91Q82 70 88 43Q91 33 101 40L128 59Q159 50 191 59L218 40Q228 34 231 45Q236 70 229 91C250 111 248 148 226 167Q201 188 160 188Q119 188 94 168C71 150 69 114 89 91Z" fill="url(#blue)"/>
+<path d="M98 49 102 79 121 66Q107 53 98 49M222 49 218 79 199 66Q212 53 222 49" fill="#f5afc1" stroke="none"/>
+<path d="M148 59Q138 77 129 87C116 98 92 105 87 128C81 157 113 183 160 183S239 158 233 130C229 106 204 100 191 87Q180 77 172 59Z" fill="#fffdf9" stroke="none"/>
+<ellipse cx="108" cy="148" rx="16" ry="9" fill="#f6b7c6" opacity=".75" stroke="none"/><ellipse cx="212" cy="148" rx="16" ry="9" fill="#f6b7c6" opacity=".75" stroke="none"/>
+<g class="eyes-open" stroke="none">
+<ellipse cx="126" cy="125" rx="8.5" ry="11" fill="#344c70"/><ellipse cx="194" cy="125" rx="8.5" ry="11" fill="#344c70"/>
+<ellipse cx="124" cy="121" rx="3.5" ry="4" fill="white"/><ellipse cx="192" cy="121" rx="3.5" ry="4" fill="white"/>
+<circle cx="129" cy="129" r="2" fill="#a6d9f1"/><circle cx="197" cy="129" r="2" fill="#a6d9f1"/>
+</g>
+<g class="eyes-sleep" fill="none" stroke="#344c70" stroke-width="3"><path d="M118 126q8 8 16 0m52 0q8 8 16 0"/></g>
+<g fill="none" stroke="#52769a" stroke-width="3"><circle cx="124" cy="124" r="25"/><circle cx="196" cy="124" r="25"/><path d="M149 121q11-8 22 0m-72-2-13-3m135 3 13-3"/></g>
+<path d="M106 111q4-7 10-8m62 8q4-7 10-8" fill="none" stroke="white" stroke-width="2.5" opacity=".8"/>
+<path d="M156 146q4-3 8 0l-4 4Z" fill="#bd8f9f" stroke="none"/><path d="M160 150v3m-9 0q4 7 9 0 5 7 9 0" fill="none" stroke="#65738d" stroke-width="2.4"/>
+<path d="m96 146-13-2m13 9-12 3m140-12 13-2m-13 11 12 3" fill="none" stroke="#7fabc6" stroke-width="2"/>
+</g>
+<g class="paw paw-left"><path d="M91 204q17-11 27 4l5 19q-3 13-21 9-19 0-16-13Z" fill="white"/><path d="m96 226 1 7m9-7 1 7" stroke="#bed2e7" stroke-width="2"/></g>
+<g class="paw paw-right"><ellipse cx="231" cy="199" rx="18" ry="12" fill="white"/></g>
+<g class="computer"><path d="M127 171h128q9 0 7 10l-13 57H142l-22-58q-3-9 7-9Z" fill="url(#laptop)"/><path d="M131 179h117" stroke="#5485bd" stroke-width="2"/><path d="M123 238h135q-1 8-10 8H132l-17-7Z" fill="#12306c"/>
+<g class="code-lines" fill="none" stroke="white" stroke-width="5"><path class="code-one" d="m177 196-11 9 11 9"/><path class="code-two" d="m199 192-11 27"/><path class="code-three" d="m210 196 11 9-11 9"/></g></g></g>
+<g class="sleep-marks" fill="#3579b9" font-family="Segoe UI" font-weight="600"><text x="260" y="77" font-size="19">z</text><text x="276" y="59" font-size="14">z</text></g>
+<g class="offline-mark"><circle cx="268" cy="106" r="15" fill="#fff0df" stroke="#bd8c56"/><path d="M268 98v9m0 5v1" stroke="#966732" stroke-width="3" stroke-linecap="round"/></g>
+    </svg>
+  </div>
+  <section class="status-card" aria-label="Status 9router">
+    <div class="status-top"><span class="status-pill"><i aria-hidden="true"></i><span id="state-label">Menghubungkan</span></span><span class="router-label">9router <span aria-hidden="true">↗</span></span></div>
+    <h1 id="headline">Mochi sedang menunggu.</h1><p id="detail">Memeriksa koneksi ke router…</p>
+    <div class="status-footer"><span id="model" title="Belum ada model">Belum ada model</span><span id="activity">— permintaan</span></div>
+  <footer class="token-card" title="Pemakaian hari ini sejak 00.00 waktu lokal 9router (WIB)."><div>Token <span class="period">hari ini</span> <strong id="token-total">—</strong></div><div><span>Input <b id="token-input">—</b></span><span>Output <b id="token-output">—</b></span></div></footer>
+  </section>
+</main>
+<dialog id="settings" aria-labelledby="settings-title">
+  <form id="settings-form" novalidate>
+    <div class="panel-heading"><span class="eyebrow">RUANG MOCHI</span><button type="button" id="close-settings" class="icon-button" aria-label="Tutup pengaturan">×</button></div>
+    <h2 id="settings-title">Pengaturan</h2><p class="panel-copy">Atur ukuran dan koneksi Mochi.</p>
+    <label class="info-toggle" for="show-info"><span>Tampilkan info widget<small>Nama, status aktif, dan detail token</small></span><input id="show-info" type="checkbox" checked></label>
+    <label for="widget-size">Ukuran widget <output id="size-value">100%</output></label>
+    <input id="widget-size" type="range" min="50" max="100" step="5" value="100" aria-describedby="size-hint">
+    <p id="size-hint">50% kecil · 100% normal. Otomatis tersimpan.</p>
+    <label for="endpoint">Alamat 9router</label><input id="endpoint" name="endpoint" type="url" value="http://127.0.0.1:20128" spellcheck="false" autocomplete="off" aria-describedby="endpoint-hint settings-message" required>
+    <p id="endpoint-hint">Router lokal · port 20128</p><p id="settings-message" role="status"></p>
+    <button id="save-button" class="save-button" type="submit">Simpan koneksi <span aria-hidden="true">↗</span></button>
+    <p class="panel-footnote">Tersambung ke aktivitas nyata 9router.</p>
+  </form>
+</dialog>
+<div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body></html>

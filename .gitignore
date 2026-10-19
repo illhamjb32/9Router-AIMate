@@ -1,0 +1,11 @@
+src-tauri/target/
+src-tauri/gen/
+node_modules/
+qa/
+backups/
+*.exe
+*.pdb
+__pycache__/
+.env
+.env.*
+!.env.example
